@@ -1,0 +1,33 @@
+{
+  "name": "phantom-aas",
+  "version": "1.0.0",
+  "description": "HTML to PDF as a service",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vanwalj/phantom-aas.git"
+  },
+  "keywords": [
+    "HTML",
+    "to",
+    "PDF",
+    "phantom",
+    "api",
+    "server"
+  ],
+  "author": "Jordan Van Walleghem <j.vanwall@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vanwalj/phantom-aas/issues"
+  },
+  "homepage": "https://github.com/vanwalj/phantom-aas#readme",
+  "dependencies": {
+    "bluebird": "^3.3.4",
+    "express": "^4.13.4",
+    "formidable": "^1.0.17",
+    "joi": "^8.0.5"
+  }
+}

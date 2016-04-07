@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+'use strict';
+
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const handler = require('../');
+
+const app = express();
+
+const handler = () => (req, res, next) => {
+  next = next || () => null;
+  
+  phantom(req.body.html)
+    .then(pdf => res.send('data:application/pdf;base64,' + new Buffer(pdf).toString('base64')))
+    .asCallback(next)
+};
+
+app
+  .use(bodyParser.json())
+  .use(handler())
+  .listen(process.env.PORT, () => {
+    console.log(`Listening on ${ process.env.PORT }`);
+  });
