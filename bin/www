@@ -4,21 +4,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const handler = require('../');
+const phantom = require('../');
 
 const app = express();
+
+const port = process.env.PORT || 9999;
 
 const handler = () => (req, res, next) => {
   next = next || () => null;
   
-  phantom(req.body.html)
+  return phantom(req.body.html)
     .then(pdf => res.send('data:application/pdf;base64,' + new Buffer(pdf).toString('base64')))
-    .asCallback(next)
+    .asCallback(next);
 };
 
 app
   .use(bodyParser.json())
   .use(handler())
-  .listen(process.env.PORT, () => {
-    console.log(`Listening on ${ process.env.PORT }`);
+  .listen(port, () => {
+    console.log(`Listening on ${ port }`);
   });
