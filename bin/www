@@ -10,12 +10,17 @@ const app = express();
 
 const port = process.env.PORT || 9999;
 
-const handler = () => (req, res, next) => {
-  next = next || () => null;
-  
-  return phantom(req.body.html)
-    .then(pdf => res.send('data:application/pdf;base64,' + new Buffer(pdf).toString('base64')))
-    .asCallback(next);
+const handler = () => (req, res) => {
+  if (!req.body.html) {
+    return res.sendStatus(400);
+  }
+  return phantom(req.body.html, req.body)
+    .then(pdf => {
+      if (req.body.output === 'pdf') {
+        res.send(`data:application/pdf;base64,${ pdf.toString('base64') }`);
+      }
+      res.send(pdf);
+    });
 };
 
 app
